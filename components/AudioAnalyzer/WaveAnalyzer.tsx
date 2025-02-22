@@ -1,18 +1,21 @@
 'use client';
 import React, { useState, useEffect } from 'react';
-import { generateWaveform } from '@/utils/mathHelpers';
+import { generateWaveform, calculatePitch, calculateIntensity } from '@/utils/mathHelpers'; // Import new functions
 import { LineChart, Line, XAxis, YAxis, CartesianGrid } from 'recharts';
-import { WaveformData, WaveformType } from './types'; // Import types
+import { WaveformData, WaveformType } from './types'; 
 
 export default function WaveAnalyzer() {
-  const [data, setData] = useState<WaveformData[]>([]); // Specify type for data
+  const [data, setData] = useState<WaveformData[]>([]); 
   const [frequency, setFrequency] = useState(440);
-  const [waveform, setWaveform] = useState<WaveformType>('sine'); // Add waveform state
+  const [waveform, setWaveform] = useState<WaveformType>('sine'); 
 
   useEffect(() => {
-    const newData = generateWaveform(frequency, 1, waveform); // Use waveform state
+    const newData = generateWaveform(frequency, 1, waveform); 
     setData(newData);
-  }, [frequency, waveform]); // Add waveform to dependency array
+  }, [frequency, waveform]); 
+
+  const pitch = calculatePitch(data);
+  const intensity = calculateIntensity(data);
 
   return (
     <div className="p-4">
@@ -43,6 +46,17 @@ export default function WaveAnalyzer() {
         <YAxis />
         <Line type="monotone" dataKey="amplitude" stroke="#8884d8" dot={false} />
       </LineChart>
+      {/* Add pitch and intensity display */}
+      <div className="grid grid-cols-2 gap-4 mt-4">
+        <div className="p-4 border rounded">
+          <h3>Pitch</h3>
+          <p>{pitch.toFixed(1)} Hz</p>
+        </div>
+        <div className="p-4 border rounded">
+          <h3>Intensity</h3>
+          <p>{(intensity * 100).toFixed(1)}%</p>
+        </div>
+      </div>
     </div>
   );
 }
