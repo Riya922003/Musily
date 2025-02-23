@@ -1,18 +1,19 @@
 'use client';
+
 import React, { useState, useEffect } from 'react';
-import { generateWaveform, calculatePitch, calculateIntensity } from '@/utils/mathHelpers'; // Import new functions
+import { generateWaveform, calculatePitch, calculateIntensity } from '@/utils/mathHelpers';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid } from 'recharts';
-import { WaveformData, WaveformType } from './types'; 
+import { WaveformData, WaveformType } from './types';
 
 export default function WaveAnalyzer() {
-  const [data, setData] = useState<WaveformData[]>([]); 
+  const [data, setData] = useState<WaveformData[]>([]);
   const [frequency, setFrequency] = useState(440);
-  const [waveform, setWaveform] = useState<WaveformType>('sine'); 
+  const [waveform, setWaveform] = useState<WaveformType>('sine');
 
   useEffect(() => {
-    const newData = generateWaveform(frequency, 1, waveform); 
+    const newData = generateWaveform(frequency, 1, waveform);
     setData(newData);
-  }, [frequency, waveform]); 
+  }, [frequency, waveform]);
 
   const pitch = calculatePitch(data);
   const intensity = calculateIntensity(data);
@@ -46,7 +47,6 @@ export default function WaveAnalyzer() {
         <YAxis />
         <Line type="monotone" dataKey="amplitude" stroke="#8884d8" dot={false} />
       </LineChart>
-      {/* Add pitch and intensity display */}
       <div className="grid grid-cols-2 gap-4 mt-4">
         <div className="p-4 border rounded">
           <h3>Pitch</h3>
