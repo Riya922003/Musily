@@ -3,8 +3,8 @@ import WaveAnalyzer from '@/components/AudioAnalyzer/WaveAnalyzer';
 import LiveAudioAnalyzer from '@/components/LiveAudioAnalyzer/LiveAudioAnalyzer';
 import WaveGenerator from '@/components/AudioAnalyzer/WaveGenerator';
 import WaveVisualizer from '@/components/AudioAnalyzer/WaveVisualizer';
-import audioEffectChain from "@/components/LiveAudioAnalyzer/audioEffectChain";
-import spectogramWaterfallVisualisation from "@/components/LiveAudioAnalyzer/spectogramWaterfallVisualisation";
+import Spectrogram3D from "@/components/LiveAudioAnalyzer/Spectrogram3D";
+import AudioEffectsChain from "@/components/LiveAudioAnalyzer/AudioEffectsChain";
 
 export default function Home() {
   return (
@@ -36,12 +36,12 @@ export default function Home() {
 
             <section>
               <h2 className="text-2xl font-semibold mb-4">3D Spectogram waterfall visualisation </h2>
-            <spectogramWaterfallVisualisation />
+            <Spectrogram3D  />
             </section>
 
             <section>
               <h2 className="text-2xl font-semibold mb-4">Audio effect chain</h2>
-             <audioEffectChain />
+             <AudioEffectsChain />
             </section>
           </div>
         </div>
